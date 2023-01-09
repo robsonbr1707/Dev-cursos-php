@@ -4,20 +4,31 @@ namespace App\Traits;
 
 class View
 {
-    private static function getContentView($view)
+    public function __construct(protected string $view,
+    protected array $params = [])
+    {}
+
+    public function makeRender()
     {
-        $file = __DIR__.'/../../resources/views/'.$view.'.php';
-            return file_exists($file) ? file_get_contents($file) : '';
+        $file = __DIR__.'/../../resources/views/'.$this->view.'.php';
+
+        foreach ($this->params as $key => $value) {
+            $$key = $value;
+        }
+        ob_start();
+
+        file_exists($file) ? include($file) : '';
+        return ob_get_clean();
     }
 
-    public static function render($view, $vars = [])
+    public static function render($view, array $params = [])
     {
-        $contentView = self::getContentView($view);
-        $keys = array_keys($vars);
-        $keys = array_map(function($item){
-            return $item;
-        }, $keys);
-            return str_replace($keys, array_values($vars), $contentView);
+        return new static($view, $params);
+    }
+
+    public function __toString()
+    {
+        return $this->makeRender();
     }
 }
 
