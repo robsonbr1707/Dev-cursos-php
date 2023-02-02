@@ -11,4 +11,5 @@ class LevelCourse extends Model
     {
         $this->table = 'level_courses';
     }
+    
 }

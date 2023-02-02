@@ -4,7 +4,7 @@ require __DIR__.'/../../../vendor/autoload.php';
 use App\Models\LevelCourse;
 
 $levelCourse = new LevelCourse;
-$levels = $levelCourse->select('', '', '')->fetchAll();
+$levels = $levelCourse->select('', '', '')->fetchAll(PDO::FETCH_ASSOC);
 
 include __DIR__.'/../layouts/header.php';
 ?>

@@ -15,16 +15,17 @@ class LevelCourseController
             return View::render('levels/index', compact('levels'));
     }
     */
-    public static function store()
+    public function store()
     {
+        /*
         $levelCourse = new LevelCourse;
         $levelCourse->insert([
             'title' => $_POST('title'),
             'slug' => $_POST('title'),
         ]);
+        */
+        echo 'Parabéns, chegou em store!';
 
-        var_dump('Sucesso!');
-        exit;
     }
 
     public static function edit()

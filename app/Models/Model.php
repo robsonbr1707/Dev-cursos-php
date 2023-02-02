@@ -35,8 +35,7 @@ abstract class Model
         
         $query = 'INSERT INTO '.$this->table.' ('.implode(',',$fields).') VALUES ('.implode(',',$binds).')';
     
-        $connection->execute($query,array_values($values));
-            return $connection->lastInsertId();
+        return $connection->execute($query,array_values($values));
     }
     
     public function update($where,$values)
